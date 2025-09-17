@@ -184,10 +184,31 @@ st.markdown("""
 
 # AI Assistant Welcome Screen
 if st.session_state.assistant_visible:
+    # Use Streamlit's native styling instead of HTML overlay
     st.markdown("""
-    <div class="ai-assistant-overlay">
-        <div class="ai-assistant-card">
-            <div class="ai-avatar">🛡️</div>
+    <style>
+    .main > div {
+        background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+        padding: 0;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Create centered welcome content
+    st.markdown("<br><br>", unsafe_allow_html=True)
+    
+    # Center the AI Security Guardian card
+    col1, col2, col3 = st.columns([1, 3, 1])
+    
+    with col2:
+        st.markdown("""
+        <div style="background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+                    border: 2px solid #10b981; border-radius: 20px; padding: 2.5rem; 
+                    text-align: center; box-shadow: 0 25px 50px rgba(16, 185, 129, 0.3); 
+                    margin: 2rem 0;">
+            <div style="width: 90px; height: 90px; background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+                        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+                        margin: 0 auto 1.5rem auto; font-size: 2.5rem; border: 3px solid #34d399;">🛡️</div>
             <h2 style="color: #10b981; margin-bottom: 1rem;">AI Security Guardian</h2>
             <p style="font-size: 1.2rem; line-height: 1.7; margin-bottom: 2rem; color: #e2e8f0;">
                 Welcome! I'm your AI Security Guardian, here to ensure safe and compliant AI deployment 
@@ -196,12 +217,11 @@ if st.session_state.assistant_visible:
                 enterprise-grade guardrails and keep your data secure! 🔒
             </p>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # Center the enter button
-    col1, col2, col3 = st.columns([1, 1, 1])
-    with col2:
+        """, unsafe_allow_html=True)
+        
+        # Add the enter button right after the card
+        st.markdown("<br>", unsafe_allow_html=True)
+        
         if st.button("🚀 Enter App", type="primary", use_container_width=True):
             st.session_state.assistant_visible = False
             st.rerun()
